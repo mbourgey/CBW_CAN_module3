@@ -354,7 +354,7 @@ samtools view -H alignment/normal/normal.sorted.bam | grep "^@RG"
 
 You should have your 9 read group entries.
 
-**Why did we use the -H switch? ** [Solution](solutions/_merge1.md)
+**Why did we use the -H switch?** [Solution](solutions/_merge1.md)
 
 **Try without. What happens?** [Solution](solutions/_merge2.md)
 
