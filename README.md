@@ -600,8 +600,7 @@ java  -Xmx2G -jar ${GATK_JAR} CalculateContamination \
 Look at the concordance and contamination metrics file
 
 ```{.bash}
-less TumorPair.concordance.tsv
-less TumorPair.contamination.tsv
+less contamination.table
 
 ```
 
