@@ -1,5 +1,7 @@
-The result are unrealistic. 
+The results are unrealistic. 
  
-It is extermly unlikely to observe a full concordance and total purity. Here these estimates are bias due to the small region we subsample for the workshop.
+It is extermly unlikely to observe such level of concordance and purity. 
+
+Here these estimates are biased due to the small region we subsample for the workshop.
 
 
