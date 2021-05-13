@@ -556,9 +556,6 @@ done
 # Extract BAM metrics
 Once your whole bam is generated, it's always a good thing to check the data again to see if everything makes sens.
 
-**Contamination**
-It tells you if your date are contaminated or if a mix-up had occured
-
 **Compute coverage**
 If you have data from a capture kit, you should see how well your targets worked
 
