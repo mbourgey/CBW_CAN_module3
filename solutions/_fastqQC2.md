@@ -4,7 +4,7 @@ Here is the command to generate the new quality graphs:
 # Generate post-trimmed QC
 mkdir postTrimQC/
 java -Xmx1G -jar ${BVATOOLS_JAR} readsqc --quality 33 \
-  --read1 reads/normal/runD0YR4ACXX_1/normal.t30l50.pair1.fastq.gz \
-  --read2 reads/normal/runD0YR4ACXX_1/normal.t30l50.pair2.fastq.gz \
-  --threads 2 --regionName normalD0YR4ACXX_1 --output postTrimQC/
+  --read1 reads/normal/runBD06UFACXX_4/normal.t30l50.pair1.fastq.gz \
+  --read2 reads/normal/runBD06UFACXX_4/normal.t30l50.pair2.fastq.gz \
+  --threads 2 --regionName normalrunBD06UFACXX_4 --output postTrimQC/
 ```
