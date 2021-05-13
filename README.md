@@ -568,44 +568,6 @@ It tells you if your library worked
 **Alignment metrics**
 It tells you if your sample and you reference fit together
 
-## Estimate Normal/tumor contamination
-To estimate these metrics we will use the GATK tool. This run in 2 steps:
- 1 - Generate GATK pileup tables
- 2 - Estimate contamination
-
-
-```{.bash}
-#Pileup table for the tumor sample
-java  -Xmx2G -jar ${GATK_JAR} GetPileupSummaries \
-   -I alignment/tumor/tumor.sorted.dup.recal.bam \
-   -V $REF/annotations/Homo_sapiens.GRCh37.gnomad.exomes.r2.0.1.sites.no-VEP.nohist.tidy.vcf.gz \
-   -L 9:130215000-130636000 \
-   -O alignment/tumor/tumor.pileups.table
-
-#Pileup table for the normal sample 
-java  -Xmx2G -jar ${GATK_JAR} GetPileupSummaries \
-   -I alignment/normal/normal.sorted.dup.recal.bam \
-   -V $REF/annotations/Homo_sapiens.GRCh37.gnomad.exomes.r2.0.1.sites.no-VEP.nohist.tidy.vcf.gz \
-   -L 9:130215000-130636000 \
-   -O alignment/normal/normal.pileups.table
-
-#Esitmate contamination
-java  -Xmx2G -jar ${GATK_JAR} CalculateContamination \
-   -I alignment/tumor/tumor.pileups.table \
-   -matched alignment/normal/normal.pileups.table \
-   -O contamination.table
-
-```
-
-Look at the concordance and contamination metrics file
-
-```{.bash}
-less contamination.table
-
-```
-
-**What do you think about these estimations ?** [solution](solutions/_Conpair.md)
-
 ## Compute coverage
 Both GATK and BVATools have depth of coverage tools. 
 
