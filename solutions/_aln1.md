@@ -1,3 +1,3 @@
-For speed, you can align each in parallel
+For speed, you can align each lane in parallel
 
-To track where the reads came from. We will set individual Read Group tags
+To set individual Read Group tags and track where the reads come from. 
