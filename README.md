@@ -506,9 +506,9 @@ We can see that it computed separate measures for each library.
 **Why do we need to recalibrate base quality scores ?** [Solution](solutions/_recal1.md)
 
 
-It runs in 2 steps, 
-1- Build covariates based on context and known snp sites
-2- Correct the reads based on these metrics
+It runs in 2 steps:  
+ 1 - Build covariates based on context and known snp sites
+ 2 - Correct the reads based on these metrics
 
 
 GATK BaseRecalibrator:

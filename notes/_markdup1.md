@@ -1,1 +1,1 @@
-3% et 7%:  this is on the high side (because it is this is old data) this should be < 2% for 2-3 lanes per library
+5% is not to bad for old data. This should be < 2% for recent libraries if they are made using a PCRfree kits and if they are not oversequenced. 
