@@ -609,6 +609,7 @@ do
     -O alignment/${i}/${i}.sorted.dup.recal.metric.insertSize.tsv \
     -H alignment/${i}/${i}.sorted.dup.recal.metric.insertSize.histo.pdf \
     --METRIC_ACCUMULATION_LEVEL LIBRARY
+    -L 9:130215000-130636000
 done
 
 ```
@@ -616,8 +617,8 @@ done
 look at the output
 
 ```{.bash}
-less -S alignment/normal/normal.sorted.dup.recal.metric.insertSize.tsv
-less -S alignment/tumor/tumor.sorted.dup.recal.metric.insertSize.tsv
+cat alignment/normal/normal.sorted.dup.recal.metric.insertSize.tsv
+cat alignment/tumor/tumor.sorted.dup.recal.metric.insertSize.tsv
 
 ```
 
