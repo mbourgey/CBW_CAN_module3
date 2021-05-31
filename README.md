@@ -580,13 +580,13 @@ module load  mugqic/GenomeAnalysisTK/4.1.0.0
 ```
 [note on DepthOfCoverage command](notes/_DOC.md)
 
-Coverage is the expected ~70-110x in these project
+Coverage is the expected ~50x in these project
 
 Look at the coverage:
 
 ```{.bash}
-cat -S alignment/normal/normal.sorted.dup.recal.coverage.sample_interval_summary
-cat -S alignment/tumor/tumor.sorted.dup.recal.coverage.sample_interval_summary
+cat alignment/normal/normal.sorted.dup.recal.coverage.sample_interval_summary
+cat alignment/tumor/tumor.sorted.dup.recal.coverage.sample_interval_summary
 
 ```
 
