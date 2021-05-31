@@ -585,8 +585,8 @@ Coverage is the expected ~70-110x in these project
 Look at the coverage:
 
 ```{.bash}
-less -S alignment/normal/normal.sorted.dup.recal.coverage.sample_interval_summary
-less -S alignment/tumor/tumor.sorted.dup.recal.coverage.sample_interval_summary
+cat -S alignment/normal/normal.sorted.dup.recal.coverage.sample_interval_summary
+cat -S alignment/tumor/tumor.sorted.dup.recal.coverage.sample_interval_summary
 
 ```
 
