@@ -258,7 +258,7 @@ do
 
   bwa mem -M -t 3 \
     -R "@RG\\tID:${SNAME}_${RUNID}_${LANE}\\tSM:${SNAME}\\t\
-LB:${SNAME}\\tPU:${RUNID}_${LANE}\\tCN:Centre National de Genotypage\\tPL:ILLUMINA" \
+LB:${SNAME}_${RUNID}_${LANE}\\tPU:${RUNID}_${LANE}\\tCN:Centre National de Genotypage\\tPL:ILLUMINA" \
     ${REF}/genome/bwa_index/Homo_sapiens.GRCh37.fa \
     $file \
     ${file%.pair1.fastq.gz}.pair2.fastq.gz \
@@ -439,7 +439,7 @@ module unload mugqic/GenomeAnalysisTK/3.8
 module load  mugqic/GenomeAnalysisTK/4.1.0.0
   
 ```
-**Why did we use both normal and tumor together? ** [Solution](solutions/_realign3.md)
+**Why did we use both normal and tumor together?** [Solution](solutions/_realign3.md)
 
 **How could we make this go faster ?** [Solution](solutions/_realign1.md)
 

@@ -1,7 +1,8 @@
+mkdir -p $HOME/workspace/CBW_CAN_2021/Module3/
 
 docker run --privileged -v /tmp:/tmp --network host -it -w $PWD -v $HOME:$HOME \
 --user $UID:$GROUPS -v /etc/group:/etc/group  -v /etc/passwd:/etc/passwd \
--v /etc/fonts/:/etc/fonts/  c3genomics/genpipes:0.8
+-v /etc/fonts/:/etc/fonts/ -v /media:/media c3genomics/genpipes:0.8
 
 
 export REF=$MUGQIC_INSTALL_HOME/genomes/species/Homo_sapiens.GRCh37/
@@ -18,12 +19,6 @@ module load mugqic/java/openjdk-jdk1.8.0_72 \
    mugqic/bwa/0.7.17 \
    mugqic/GenomeAnalysisTK/4.1.0.0 \
    mugqic/R_Bioconductor/3.5.0_3.7 \
-   mugqic/VarScan/2.4.3 \
-   mugqic/vcftools/0.1.14 \
-   mugqic/bcftools/1.9 \
-   mugqic/VarDictJava/1.4.9 \
-   mugqic/bcbio.variation.recall/0.1.7 \
-   mugqic/snpEff/4.3 \
    mugqic/igvtools/2.3.67
 
 
@@ -39,7 +34,6 @@ zcat raw_reads/normal/run62DVGAAXX_1/normal.64.pair2.fastq.gz | head -n4
 zgrep -c "^@HWUSI" raw_reads/normal/run62DVGAAXX_1/normal.64.pair1.fastq.gz
 
 
-zgrep -c "^@" raw_reads/normal/run62DVGAAXX_1/normal.64.pair1.fastq.gz
 
 
 # Generate original QC
