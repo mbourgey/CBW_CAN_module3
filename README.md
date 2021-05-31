@@ -1,7 +1,7 @@
 
 # Introduction to DNA-Seq processing for cancer data - SNVs
 ***By Mathieu Bourgey, Ph.D***  
-*https://bitbucket.org/mugqic/mugqic_pipelines*
+*https://bitbucket.org/mugqic/genpipes*
 
 ================================
 
@@ -25,6 +25,8 @@ For practical reasons we subsampled the reads from the sample because running th
 ### Environment setup
 ```{.bash}
 
+mkdir -p $HOME/workspace/CBW_CAN_2021/Module3/
+
 docker run --privileged -v /tmp:/tmp --network host -it -w $PWD -v $HOME:$HOME \
 --user $UID:$GROUPS -v /etc/group:/etc/group  -v /etc/passwd:/etc/passwd \
 -v /etc/fonts/:/etc/fonts/  c3genomics/genpipes:0.8
@@ -33,9 +35,9 @@ docker run --privileged -v /tmp:/tmp --network host -it -w $PWD -v $HOME:$HOME \
 export REF=$MUGQIC_INSTALL_HOME/genomes/species/Homo_sapiens.GRCh37/
 
 
-cd $HOME/ebicancerworkshop2019/SNV
+cd $HOME/workspace/CBW_CAN_2021/Module3/
 
-
+ln -s $HOME/CourseData/CAN_data/Module3/
 ```
 
 
@@ -48,10 +50,6 @@ These are all already installed, but here are the original links.
   * [IGV](http://www.broadinstitute.org/software/igv/download)
   * [BWA](http://bio-bwa.sourceforge.net/)
   * [Genome Analysis Toolkit](http://www.broadinstitute.org/gatk/)
-  * [SnpEff](http://snpeff.sourceforge.net/)
-  * [Varscan2](http://varscan.sourceforge.net/)
-  * [vardict](https://github.com/AstraZeneca-NGS/VarDictJava)
-  * [bcbio variation](https://github.com/chapmanb/bcbio.variation)
 
 
 We should load the corresponding modules 
@@ -64,12 +62,6 @@ module load mugqic/java/openjdk-jdk1.8.0_72 \
    mugqic/bwa/0.7.17 \
    mugqic/GenomeAnalysisTK/4.1.0.0 \
    mugqic/R_Bioconductor/3.5.0_3.7 \
-   mugqic/VarScan/2.4.3 \
-   mugqic/vcftools/0.1.14 \
-   mugqic/bcftools/1.9 \
-   mugqic/VarDictJava/1.4.9 \
-   mugqic/bcbio.variation.recall/0.1.7 \
-   mugqic/snpEff/4.3 \
    mugqic/igvtools/2.3.67
 
 ```
