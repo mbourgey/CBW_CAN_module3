@@ -240,7 +240,7 @@ The raw reads are now cleaned up of artefacts we can align each lane separatly.
 
 **Why should this be done separatly?** [Solution](solutions/_aln1.md)
 
-**Why is it important to set Read Group information ?** [Solution](solutions_aln2.md)
+**Why is it important to set Read Group information ?** [Solution](solutions/_aln2.md)
 
 ##Alignment with bwa-mem
 
