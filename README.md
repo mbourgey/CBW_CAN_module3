@@ -126,20 +126,11 @@ zgrep -c "^@HWUSI" raw_reads/normal/run62DVGAAXX_1/normal.64.pair1.fastq.gz
 
 We should obtain 4003 reads
 
-**Why shouldn't you just do ?** 
-
-```{.bash}
-zgrep -c "^@" raw_reads/normal/run62DVGAAXX_1/normal.64.pair1.fastq.gz
-
-```
-
-[Solution](solutions/_fastq3.md)
-
 
 ### Quality
 We can't look at all the reads. Especially when working with whole genome 50x data. You could easily have Billions of reads.
 
-Tools like FastQC and BVATools readsqc can be used to plot many metrics from these data sets.
+Tools like `FastQC` and `BVATools readsqc` can be used to plot many metrics from these data sets.
 
 Let's look at the data:
 
