@@ -258,7 +258,7 @@ do
 
   bwa mem -M -t 3 \
     -R "@RG\\tID:${SNAME}_${RUNID}_${LANE}\\tSM:${SNAME}\\t\
-LB:${SNAME}_${RUNID}_${LANE}\\tPU:${RUNID}_${LANE}\\tCN:Centre National de Genotypage\\tPL:ILLUMINA" \
+LB:${SNAME}_${RUNID}\\tPU:${RUNID}_${LANE}\\tCN:Centre National de Genotypage\\tPL:ILLUMINA" \
     ${REF}/genome/bwa_index/Homo_sapiens.GRCh37.fa \
     $file \
     ${file%.pair1.fastq.gz}.pair2.fastq.gz \
@@ -609,7 +609,6 @@ do
     -O alignment/${i}/${i}.sorted.dup.recal.metric.insertSize.tsv \
     -H alignment/${i}/${i}.sorted.dup.recal.metric.insertSize.histo.pdf \
     --METRIC_ACCUMULATION_LEVEL LIBRARY
-    -L 9:130215000-130636000
 done
 
 ```
@@ -666,4 +665,4 @@ exit
 
 
 ## Aknowledgments
-I would like to thank and acknowledge Louis Letourneau for this help and for sharing his material. The format of the tutorial has been inspired from Mar Gonzalez Porta. I also want to acknowledge Pierre-Olivier Quirion, Joel Fillon, Louis Letrouneau (again), Robert Eveleigh, Edouard Henrion, Francois Lefebvre, Maxime Caron and Guillaume Bourque for the help in building these pipelines and working with all the various datasets.
+I would like to thank and acknowledge Pierre-Olivier Quirion, Robert Eveleigh, Edouard Henrion for their inputs while building this workshop.
