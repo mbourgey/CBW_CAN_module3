@@ -29,7 +29,7 @@ mkdir -p $HOME/workspace/CBW_CAN_2021/Module3/
 
 docker run --privileged -v /tmp:/tmp --network host -it -w $PWD -v $HOME:$HOME \
 --user $UID:$GROUPS -v /etc/group:/etc/group  -v /etc/passwd:/etc/passwd \
--v /etc/fonts/:/etc/fonts/  c3genomics/genpipes:0.8
+-v /etc/fonts/:/etc/fonts/ -v /media:/media c3genomics/genpipes:0.8
 
 
 export REF=$MUGQIC_INSTALL_HOME/genomes/species/Homo_sapiens.GRCh37/
@@ -37,7 +37,7 @@ export REF=$MUGQIC_INSTALL_HOME/genomes/species/Homo_sapiens.GRCh37/
 
 cd $HOME/workspace/CBW_CAN_2021/Module3/
 
-ln -s $HOME/CourseData/CAN_data/Module3/
+ln -s $HOME/CourseData/CAN_data/Module3/* . 
 ```
 
 
@@ -152,7 +152,6 @@ All the generated graphics have their uses. But 3 of them are particularly usefu
         - The Box plot shows the quality distribution of your data.
  
 The quality of a base is computated using the Phread quality score.
-[notes](notes/_fastQC1.md) 
 
 
 The quality of a base is computated using the Phread quality score.
