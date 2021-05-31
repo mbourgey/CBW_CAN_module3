@@ -507,8 +507,8 @@ We can see that it computed separate measures for each library.
 
 
 It runs in 2 steps:  
- 1 - Build covariates based on context and known snp sites
- 2 - Correct the reads based on these metrics
+ 1 - Build covariates based on context and known snp sites  
+ 2 - Correct the reads based on these metrics  
 
 
 GATK BaseRecalibrator:
