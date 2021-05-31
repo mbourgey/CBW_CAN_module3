@@ -227,9 +227,8 @@ cat reads/normal/run62DVGAAXX_1/normal.trim.out
 
 **What does Trimmomatic says it did ?** [Solution](solutions/_trim2.md)
 
-__Exercice:__
 
-**Let's generate the new graphs** [Solution](solutions/_fastqQC2.md)
+__Exercice: Let's generate the new graphs__ [Solution](solutions/_fastqQC2.md)
 
 
 **How does it look now ?** [Solution](solutions/_trim3.md)
