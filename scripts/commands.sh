@@ -83,7 +83,7 @@ do
 
   bwa mem -M -t 3 \
     -R "@RG\\tID:${SNAME}_${RUNID}_${LANE}\\tSM:${SNAME}\\t\
-LB:${SNAME}\\tPU:${RUNID}_${LANE}\\tCN:Centre National de Genotypage\\tPL:ILLUMINA" \
+LB:${SNAME}_${RUNID}_${LANE}\\tPU:${RUNID}_${LANE}\\tCN:Centre National de Genotypage\\tPL:ILLUMINA" \
     ${REF}/genome/bwa_index/Homo_sapiens.GRCh37.fa \
     $file \
     ${file%.pair1.fastq.gz}.pair2.fastq.gz \
