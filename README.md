@@ -1,5 +1,5 @@
 
-# Introduction to DNA-Seq processing for cancer data - SNVs
+# CBW CAN 2021 - Module 3: Genome Alignment 
 ***By Mathieu Bourgey, Ph.D***  
 *https://bitbucket.org/mugqic/genpipes*
 
@@ -9,7 +9,7 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 3.0 Unpor
 
 ================================
 
-In this workshop, we will present the main steps that are commonly used to process and to analyze cancer sequencing data. We will focus only on whole genome data and provide command lines that allow detecting Single Nucleotide Variants (SNV). This workshop will show you how to launch individual steps of a complete DNA-Seq SNV pipeline using cancer data
+In this workshop, we will present the main steps that are commonly used to process and to analyze cancer sequencing data. We will focus only on whole genome data and provide command lines that allow creating high quality alignment files usable for variant detection. This workshop will show you how to launch individual the first steps of [a complete DNA-Seq SNV pipeline using to analyze cancer data](https://genpipes.readthedocs.io/en/master/user_guide/pipelines/gp_tumourpair.html?highlight=tumor) 
 
 
 ## Data Source
@@ -49,7 +49,6 @@ These are all already installed, but here are the original links.
   * [SAMTools](http://sourceforge.net/projects/samtools/)
   * [IGV](http://www.broadinstitute.org/software/igv/download)
   * [BWA](http://bio-bwa.sourceforge.net/)
-  * [Genome Analysis Toolkit](http://www.broadinstitute.org/gatk/)
 
 
 We should load the corresponding modules 
@@ -62,7 +61,6 @@ module load mugqic/java/openjdk-jdk1.8.0_72 \
    mugqic/bwa/0.7.17 \
    mugqic/GenomeAnalysisTK/4.1.0.0 \
    mugqic/R_Bioconductor/3.5.0_3.7 \
-   mugqic/igvtools/2.3.67
 
 ```
 
@@ -616,8 +614,8 @@ done
 look at the output
 
 ```{.bash}
-cat alignment/normal/normal.sorted.dup.recal.metric.insertSize.tsv
-cat alignment/tumor/tumor.sorted.dup.recal.metric.insertSize.tsv
+head -20 alignment/normal/normal.sorted.dup.recal.metric.insertSize.tsv
+head -20 alignment/tumor/tumor.sorted.dup.recal.metric.insertSize.tsv
 
 ```
 

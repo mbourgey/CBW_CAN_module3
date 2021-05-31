@@ -1,16 +1,17 @@
+
 mkdir -p $HOME/workspace/CBW_CAN_2021/Module3/
 
-docker run --privileged -v /tmp:/tmp --network host -it -w $PWD -v $HOME:$HOME \
---user $UID:$GROUPS -v /etc/group:/etc/group  -v /etc/passwd:/etc/passwd \
--v /etc/fonts/:/etc/fonts/ -v /media:/media c3genomics/genpipes:0.8
+#docker run --privileged -v /tmp:/tmp --network host -it -w $PWD -v $HOME:$HOME \
+#--user $UID:$GROUPS -v /etc/group:/etc/group  -v /etc/passwd:/etc/passwd \
+#-v /etc/fonts/:/etc/fonts/ -v /media:/media c3genomics/genpipes:0.8
 
 
 export REF=$MUGQIC_INSTALL_HOME/genomes/species/Homo_sapiens.GRCh37/
 
 
-cd $HOME/ebicancerworkshop2019/SNV
+cd $HOME/workspace/CBW_CAN_2021/Module3/
 
-
+ln -s $HOME/CourseData/CAN_data/Module3/* . 
 
 module load mugqic/java/openjdk-jdk1.8.0_72 \
    mugqic/bvatools/1.6 \
@@ -21,20 +22,12 @@ module load mugqic/java/openjdk-jdk1.8.0_72 \
    mugqic/R_Bioconductor/3.5.0_3.7 \
    mugqic/igvtools/2.3.67
 
-
-
-
 #zless -S raw_reads/normal/run62DVGAAXX_1/normal.64.pair1.fastq.gz
-
 
 zcat raw_reads/normal/run62DVGAAXX_1/normal.64.pair1.fastq.gz | head -n4
 zcat raw_reads/normal/run62DVGAAXX_1/normal.64.pair2.fastq.gz | head -n4
 
-
 zgrep -c "^@HWUSI" raw_reads/normal/run62DVGAAXX_1/normal.64.pair1.fastq.gz
-
-
-
 
 # Generate original QC
 mkdir -p originalQC/
@@ -43,9 +36,7 @@ java -Xmx1G -jar ${BVATOOLS_JAR} readsqc --quality 64 \
   --read2 raw_reads/normal/run62DVGAAXX_1/normal.64.pair2.fastq.gz \
   --threads 2 --regionName normalrun62DVGAAXX_1 --output originalQC/
 
-
 cat adapters.fa
-
 
 # Trim and convert data
 for file in raw_reads/*/run*_?/*.pair1.fastq.gz;
@@ -67,7 +58,6 @@ do
 done
 
 cat reads/normal/run62DVGAAXX_1/normal.trim.out
-
 
 # Align data
 for file in reads/*/run*/*.pair1.fastq.gz;
@@ -92,7 +82,6 @@ LB:${SNAME}_${RUNID}\\tPU:${RUNID}_${LANE}\\tCN:Centre National de Genotypage\\t
     -O ${OUTPUT_DIR}/${SNAME}.sorted.bam \
     --CREATE_INDEX true --SORT_ORDER coordinate --MAX_RECORDS_IN_RAM 500000
 done
-
 
 # Merge Data
 java -Xmx2G -jar ${GATK_JAR}  MergeSamFiles \
@@ -131,13 +120,10 @@ java -Xmx2G -jar ${GATK_JAR}  MergeSamFiles \
   -O alignment/tumor/tumor.sorted.bam \
   --CREATE_INDEX true
 
-
 ls -l alignment/normal/
 samtools view -H alignment/normal/normal.sorted.bam | grep "^@RG"
 
-
 samtools view alignment/normal/normal.sorted.bam | head -n4
-
 
 # Realign
 #switch to old GATK 3.8
@@ -169,8 +155,6 @@ module unload mugqic/GenomeAnalysisTK/3.8
 module load  mugqic/GenomeAnalysisTK/4.1.0.0
   
 
-
-
 # Mark Duplicates
 java -Xmx2G -jar ${GATK_JAR}  MarkDuplicates \
   --REMOVE_DUPLICATES false --CREATE_INDEX true \
@@ -184,9 +168,7 @@ java -Xmx2G -jar ${GATK_JAR}  MarkDuplicates \
   -O alignment/tumor/tumor.sorted.dup.bam \
   --METRICS_FILE alignment/tumor/tumor.sorted.dup.metrics
 
-
 #less alignment/normal/normal.sorted.dup.metrics
-
 
 # Recalibrate
 for i in normal tumor
@@ -204,32 +186,6 @@ do
       -O alignment/${i}/${i}.sorted.dup.recal.bam \
       -I alignment/${i}/${i}.sorted.dup.bam
 done
-
-
-#Pileup table for the tumor sample
-java  -Xmx2G -jar ${GATK_JAR} GetPileupSummaries \
-   -I alignment/tumor/tumor.sorted.dup.recal.bam \
-   -V $REF/annotations/Homo_sapiens.GRCh37.gnomad.exomes.r2.0.1.sites.no-VEP.nohist.tidy.vcf.gz \
-   -L 9:130215000-130636000 \
-   -O alignment/tumor/tumor.pileups.table
-
-#Pileup table for the normal sample 
-java  -Xmx2G -jar ${GATK_JAR} GetPileupSummaries \
-   -I alignment/normal/normal.sorted.dup.recal.bam \
-   -V $REF/annotations/Homo_sapiens.GRCh37.gnomad.exomes.r2.0.1.sites.no-VEP.nohist.tidy.vcf.gz \
-   -L 9:130215000-130636000 \
-   -O alignment/normal/normal.pileups.table
-
-#Esitmate contamination
-java  -Xmx2G -jar ${GATK_JAR} CalculateContamination \
-   -I alignment/tumor/tumor.pileups.table \
-   -matched alignment/normal/normal.pileups.table \
-   -O contamination.table
-
-
-#less TumorPair.concordance.tsv
-#less TumorPair.contamination.tsv
-
 
 # Get Depth
 #switch to old GATK 3.8
@@ -256,9 +212,9 @@ done
 module unload mugqic/GenomeAnalysisTK/3.8
 module load  mugqic/GenomeAnalysisTK/4.1.0.0
 
-#less -S alignment/normal/normal.sorted.dup.recal.coverage.sample_interval_summary
-#less -S alignment/tumor/tumor.sorted.dup.recal.coverage.sample_interval_summary
 
+cat alignment/normal/normal.sorted.dup.recal.coverage.sample_interval_summary
+cat alignment/tumor/tumor.sorted.dup.recal.coverage.sample_interval_summary
 
 # Get insert size
 for i in normal tumor
@@ -271,10 +227,8 @@ do
     --METRIC_ACCUMULATION_LEVEL LIBRARY
 done
 
-
-#less -S alignment/normal/normal.sorted.dup.recal.metric.insertSize.tsv
-#less -S alignment/tumor/tumor.sorted.dup.recal.metric.insertSize.tsv
-
+head -20t alignment/normal/normal.sorted.dup.recal.metric.insertSize.tsv
+head -20 alignment/tumor/tumor.sorted.dup.recal.metric.insertSize.tsv
 
 # Get alignment metrics
 for i in normal tumor
@@ -286,115 +240,8 @@ do
     --METRIC_ACCUMULATION_LEVEL LIBRARY
 done
 
-
 #less -S alignment/normal/normal.sorted.dup.recal.metric.alignment.tsv
 #less -S alignment/tumor/tumor.sorted.dup.recal.metric.alignment.tsv
 
-
-mkdir pairedVariants
-
-
-# SAMTools mpileup
-for i in normal tumor
-do
-samtools mpileup -B -q 1 \
-  -f ${REF}/genome/Homo_sapiens.GRCh37.fa \
-  -r 9:130215000-130636000 \
-  alignment/${i}/${i}.sorted.dup.recal.bam \
-  > pairedVariants/${i}.mpileup
-done
-
-
-# varscan
-java -Xmx2G -jar ${VARSCAN2_JAR} somatic \
-   pairedVariants/normal.mpileup \
-   pairedVariants/tumor.mpileup \
-   pairedVariants/varscan2 \
-   --output-vcf 1 \
-   --strand-filter 1 \
-   --somatic-p-value 0.001 
-
-
-# Filtering
-grep "^#\|SS=2" pairedVariants/varscan2.snp.vcf > pairedVariants/varscan2.snp.somatic.vcf
-
-
-# Variants MuTecT2
-java -Xmx2G -jar ${GATK_JAR} Mutect2 \
-  -R ${REF}/genome/Homo_sapiens.GRCh37.fa \
-  -I alignment/normal/normal.sorted.dup.recal.bam \
-  -I alignment/tumor/tumor.sorted.dup.recal.bam \
-  -normal normal \
-  -tumor tumor \
-  --germline-resource $REF/annotations/Homo_sapiens.GRCh37.gnomad.exomes.r2.0.1.sites.no-VEP.nohist.tidy.vcf.gz \
-  -O pairedVariants/mutect2.vcf \
-  -L 9:130215000-130636000
-
-
-# Filtering
-java -Xmx2G -jar ${GATK_JAR} FilterMutectCalls \
-   -V pairedVariants/mutect2.vcf \
-   --contamination-table contamination.table \
-   -O pairedVariants/mutect2.filtered.vcf
-
-vcftools --vcf pairedVariants/mutect2.vcf --stdout --remove-indels --recode | sed -e "s|normal|NORMAL|g" -e "s|tumor|TUMOR|g"  >  pairedVariants/mutect2.snp.somatic.vcf
-  
-
-$VARDICT_HOME/bin/VarDict \
-  -G ${REF}/genome/Homo_sapiens.GRCh37.fa \
-  -N tumor_pair \
-  -b "alignment/tumor/tumor.sorted.dup.recal.bam|alignment/normal/normal.sorted.dup.recal.bam"  \
-  -C -Q 10 -c 1 -S 2 -E 3 -g 4 -th 3 \
-  | $VARDICT_BIN/testsomatic.R   \
-  | $VARDICT_BIN/var2vcf_paired.pl -N "TUMOR|NORMAL" -f 0.05 > pairedVariants/vardict.vcf
-  
-
-bcftools filter \
-   -i 'FILTER="PASS"&&TYPE="snp"&&INFO/STATUS="StrongSomatic"' \
-   pairedVariants/vardict.vcf \
-   | awk ' BEGIN {OFS="\t"} \
-   { if(substr($0,0,1) == "#" || length($4) == length($5)) {if(substr($0,0,2) != "##") \
-   {t=$10; $10=$11; $11=t} ; print}} ' > pairedVariants/vardict.snp.somatic.vcf
-
-#less pairedVariants/varscan2.snp.somatic.vcf
-#less pairedVariants/mutect2.snp.somatic.vcf
-#less pairedVariants/vardict.snp.somatic.vcf
-
-# Unified callset
-bcbio-variation-recall ensemble \
-  --cores 2 --numpass 2 --names mutect2,varscan2,vardict \
-  pairedVariants/ensemble.snp.somatic.vcf.gz \
-  ${REF}/genome/Homo_sapiens.GRCh37.fa \
-  pairedVariants/mutect2.snp.somatic.vcf \
-  pairedVariants/varscan2.snp.somatic.vcf \
-  pairedVariants/vardict.snp.somatic.vcf
-
-
-#zless pairedVariants/ensemble.snp.somatic.vcf.gz
-
-
-# SnpEff
-java  -Xmx6G -jar ${SNPEFF_HOME}/snpEff.jar \
-  eff -v -c ${SNPEFF_HOME}/snpEff.config \
-  -o vcf \
-  -i vcf \
-  -stats pairedVariants/ensemble.snp.somatic.snpeff.stats.html \
-  GRCh37.75 \
-  pairedVariants/ensemble.snp.somatic.vcf.gz \
-  > pairedVariants/ensemble.snp.somatic.snpeff.vcf
-
-#less -S pairedVariants/ensemble.snp.somatic.snpeff.vcf
-
-# Coverage Track
-for i in normal tumor
-do
-  igvtools count \
-    -f min,max,mean \
-    alignment/${i}/${i}.sorted.dup.recal.bam \
-    alignment/${i}/${i}.sorted.dup.recal.bam.tdf \
-    b37
-done
-
-exit
-
+#exit
 
