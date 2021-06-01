@@ -488,7 +488,8 @@ java -Xmx2G -jar ${GATK_JAR}  MarkDuplicates \
 We can look in the metrics output to see what happened.
 
 ```{.bash}
-less alignment/normal/normal.sorted.dup.metrics
+less -S alignment/normal/normal.sorted.dup.metrics
+less -S alignment/tumor/tumor.sorted.dup.metrics
 
 ```
 
@@ -578,7 +579,7 @@ module load  mugqic/GenomeAnalysisTK/4.1.0.0
 ```
 [note on DepthOfCoverage command](notes/_DOC.md)
 
-Coverage is the expected ~50x in these project
+Coverage is the expected ~50x in this project
 
 Look at the coverage:
 
