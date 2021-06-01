@@ -20,7 +20,7 @@ For more details about [CageKid](http://www.cng.fr/cagekid/)
 
 For practical reasons we subsampled the reads from the sample because running the whole dataset would take way too much time and resources.
 
-All data use and  generated in this workshop is accessible [here](https://datahub-263-pq5.p.genap.ca/CAN/)
+All data used and generated in this workshop is accessible [here](https://datahub-263-pq5.p.genap.ca/CAN/)
 
 ### Environment setup
 ```{.bash}
